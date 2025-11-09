@@ -8,7 +8,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-22.04
-    
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -51,6 +51,15 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
+      - name: set debug
+        run: export ACTIONS_RUNNER_DEBUG="true"
+
+      - name: debugging
+        if:  runner.debug == '1'
+        run: |
+          echo "debugging"
+          ls
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
