@@ -10,7 +10,9 @@
 
   <article class="post-content">
     <h1 class="post-title">{{ .Title }}</h1>
-    <div class="post-meta">Date: {{ .Date.Format "2006-01-02" }}</div>
+    <div class="post-meta">
+      Date: {{ .Date.Format "2006-01-02" }} | Group: {{ .Params.group | default "blog" }}
+    </div>
 
     <div class="markdown-body">{{ .Content }}</div>
   </article>

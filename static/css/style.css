@@ -44,13 +44,40 @@ a:hover {
   list-style: none;
   padding: 0;
 }
-.post-list li {
-  margin-bottom: 0.8rem;
-  display: flex;
-  gap: 1.5rem;
-}
-.post-list .date {
+.ls-total {
   color: var(--comment);
+  margin: 0.6rem 0 0.8rem;
+}
+
+.ls-row {
+  margin-bottom: 0.45rem;
+  display: grid;
+  grid-template-columns: 110px 20px 60px 80px 70px 110px minmax(160px, 1fr);
+  gap: 0.8rem;
+  align-items: baseline;
+  white-space: nowrap;
+}
+
+.col-links,
+.col-size {
+  text-align: right;
+}
+
+.col-date,
+.col-perms,
+.col-links,
+.col-owner,
+.col-group,
+.col-size {
+  color: var(--comment);
+}
+
+.home-header h1 {
+  margin-bottom: 0.5rem;
+}
+
+.home-header p {
+  margin-top: 0;
 }
 
 .post-layout {

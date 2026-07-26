@@ -1,13 +1,22 @@
 {{ define "main" }}
 <header class="home-header">
-  <h1><span class="prompt">$</span> ls -la ~/posts</h1>
+  <h1>{{ .Site.Title }}</h1>
+  <p><span class="prompt">$</span> ls -al ~/posts</p>
 </header>
 
+{{ $posts := (where .Site.RegularPages "Type" "posts") }}
+<p class="ls-total">total {{ len $posts }}</p>
 <ul class="post-list">
-  {{ range where .Site.RegularPages "Type" "posts" }}
-  <li>
-    <span class="date">{{ .Date.Format "2006-01-02" }}</span>
-    <a class="post-link" href="{{ .Permalink }}">{{ .Title }}</a>
+  {{ range $posts.ByDate.Reverse }}
+  {{ $group := .Params.group | default "blog" }}
+  <li class="ls-row">
+    <span class="col-perms">-rw-r--r--</span>
+    <span class="col-links">1</span>
+    <span class="col-owner">nova</span>
+    <span class="col-group">{{ $group }}</span>
+    <span class="col-size">{{ len .Plain }}</span>
+    <span class="col-date">{{ .Date.Format "Jan 02 2006" }}</span>
+    <a class="post-link col-name" href="{{ .RelPermalink }}">{{ .File.ContentBaseName }}.md</a>
   </li>
   {{ end }}
 </ul>
