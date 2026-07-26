@@ -1,3 +1,7 @@
+{{ define "extra_head" }}
+<link rel="stylesheet" href="/css/reader-view.css" />
+{{ end }}
+
 {{ define "main" }}
 {{ $toc := .TableOfContents }}
 {{ $hasOutline := gt (len (findRE "<li>" $toc)) 0 }}
