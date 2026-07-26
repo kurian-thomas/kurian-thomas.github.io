@@ -35,6 +35,10 @@ a:hover {
 .prompt {
   color: var(--red);
 }
+
+.branch-name {
+  font-style: italic;
+}
 .container {
   max-width: 1200px;
   margin: 0 auto;

@@ -11,7 +11,7 @@
   <article class="post-content">
     <h1 class="post-title">{{ .Title }}</h1>
     <div class="post-meta">
-      Date: {{ .Date.Format "2006-01-02" }} | Group: {{ .Params.group | default "blog" }}
+      Date: {{ .Date.Format "2006-01-02" }} | Group: {{ .Params.group | default "ungrouped" }}
     </div>
 
     <div class="markdown-body">{{ .Content }}</div>
