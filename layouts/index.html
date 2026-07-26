@@ -2,7 +2,6 @@
 <header class="home-header">
   <h1>{{ .Site.Title }}</h1>
   <p><span class="prompt">nova-nvim-style-blog <span class="branch-name">master</span> ❯</span> ls -al ~/posts</p>
-  <p id="open-preview" class="open-preview" hidden></p>
 </header>
 
 {{ $posts := (where .Site.RegularPages "Section" "posts") }}
@@ -18,7 +17,7 @@
     <span class="col-group">{{ $group }}</span>
     <span class="col-size">{{ len .Plain }}</span>
     <span class="col-date">{{ .Date.Format "Jan 02 2006" }}</span>
-    <a class="post-link col-name" href="{{ .RelPermalink }}" data-post-path="{{ $name }}">{{ $name }}</a>
+    <a class="post-link col-name" href="{{ .RelPermalink }}">{{ $name }}</a>
   </li>
   {{ end }}
 </ul>

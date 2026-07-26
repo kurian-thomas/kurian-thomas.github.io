@@ -1,6 +1,6 @@
 baseURL = 'https://kurian-thomas.github.io/'
 languageCode = 'en-us'
-title = "Nova's Blog: For the joy of Software"
+title = "Nova's Blog"
 
 [markup]
   [markup.highlight]

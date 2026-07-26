@@ -20,7 +20,7 @@ body {
   font-family: "JetBrains Mono", monospace;
   line-height: 1.6;
   margin: 0;
-  padding: 2rem;
+  padding: 0 2rem 2rem;
 }
 
 a {
@@ -42,6 +42,7 @@ a:hover {
 .container {
   max-width: 1200px;
   margin: 0 auto;
+  padding-top: 0;
 }
 
 .post-list {
@@ -79,14 +80,11 @@ a:hover {
 .home-header h1 {
   margin-top: 0;
   margin-bottom: 0.5rem;
+  font-style: italic;
 }
 
 .home-header p {
   margin-top: 0;
-}
-
-.open-preview {
-  margin: 0.35rem 0 0.8rem;
 }
 
 .post-layout {
@@ -133,10 +131,6 @@ a:hover {
   margin-bottom: 2rem;
 }
 
-.open-command {
-  margin-top: 0;
-  margin-bottom: 0.45rem;
-}
 .markdown-body img {
   max-width: 100%;
   border-radius: 4px;
