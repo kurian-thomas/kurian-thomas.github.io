@@ -1,4 +1,5 @@
 {{ define "main" }}
+{{ $name := replaceRE "^posts/" "" .File.Path }}
 <div class="post-layout">
   <aside class="left-nav">
     <div class="nav-sticky">
@@ -10,6 +11,9 @@
 
   <article class="post-content">
     <h1 class="post-title">{{ .Title }}</h1>
+    <p class="open-command">
+      <span class="prompt">nova-nvim-style-blog <span class="branch-name">master</span> ❯</span> nvim {{ $name }}
+    </p>
     <div class="post-meta">
       Date: {{ .Date.Format "2006-01-02" }} | Group: {{ .Params.group | default "ungrouped" }}
     </div>
