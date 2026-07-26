@@ -1,0 +1,15 @@
+<aside class="art-box" aria-label="Pixel art">
+  {{ range $idx, $art := hugo.Data.artworks.arts }}
+  <pre class="art-item" {{ if ne $idx 0 }}hidden{{ end }}>{{ $art.content }}</pre>
+  {{ end }}
+</aside>
+<script>
+  (() => {
+    const items = document.querySelectorAll(".art-box .art-item");
+    if (!items.length) return;
+    const selected = Math.floor(Math.random() * items.length);
+    items.forEach((item, idx) => {
+      item.hidden = idx !== selected;
+    });
+  })();
+</script>

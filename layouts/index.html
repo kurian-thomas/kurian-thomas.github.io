@@ -1,6 +1,7 @@
 {{ define "main" }}
 <header class="home-header">
   <h1>{{ .Site.Title }}</h1>
+  {{ partial "artbox.html" . }}
   <p><span class="prompt">nova-nvim-style-blog <span class="branch-name">master</span> ❯</span> ls -al ~/posts</p>
 </header>
 
@@ -11,13 +12,15 @@
   {{ $group := .Params.group | default "ungrouped" }}
   {{ $name := replaceRE "^posts/" "" .File.Path }}
   <li class="ls-row">
-    <span class="col-perms">-r--r--r--</span>
-    <span class="col-links">1</span>
-    <span class="col-owner">nova</span>
-    <span class="col-group">{{ $group }}</span>
-    <span class="col-size">{{ len .Plain }}</span>
-    <span class="col-date">{{ .Date.Format "Jan 02 2006" }}</span>
-    <a class="post-link col-name" href="{{ .RelPermalink }}">{{ $name }}</a>
+    <a class="post-row-link" href="{{ .RelPermalink }}">
+      <span class="col-perms">-r--r--r--</span>
+      <span class="col-links">1</span>
+      <span class="col-owner">nova</span>
+      <span class="col-group">{{ $group }}</span>
+      <span class="col-size">{{ len .Plain }}</span>
+      <span class="col-date">{{ .Date.Format "Jan 02 2006" }}</span>
+      <span class="col-name">{{ $name }}</span>
+    </a>
   </li>
   {{ end }}
 </ul>
