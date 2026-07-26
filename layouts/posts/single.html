@@ -1,10 +1,13 @@
 {{ define "main" }}
+{{ $toc := .TableOfContents }}
+{{ $hasOutline := gt (len (findRE "<li>" $toc)) 0 }}
 <div class="post-layout">
   <aside class="left-nav">
     <div class="nav-sticky">
       <a href="/" class="back-link">cd ..</a>
-      <h3>Outline</h3>
-      {{ .TableOfContents }}
+      {{ if $hasOutline }}
+      {{ $toc }}
+      {{ end }}
     </div>
   </aside>
 

@@ -1,0 +1,8 @@
+{{- $dest := .Destination -}}
+{{- $assetPath := strings.TrimPrefix "assets/" $dest -}}
+{{- $img := resources.Get $assetPath -}}
+{{- if $img -}}
+  <img src="{{ $img.RelPermalink }}" alt="{{ .Text }}"{{ with .Title }} title="{{ . }}"{{ end }} />
+{{- else -}}
+  <img src="{{ $dest | safeURL }}" alt="{{ .Text }}"{{ with .Title }} title="{{ . }}"{{ end }} />
+{{- end -}}

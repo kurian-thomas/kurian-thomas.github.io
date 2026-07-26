@@ -1,12 +1,35 @@
 +++
-title = "Introduction"
+title = "Nova Blog: Introduction"
 date = 2026-07-25T18:14:00-07:00
 draft = false
 group = "Metadata"
 +++
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+<b>Hello, world!</b>
 
-Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+<i>"As is tradition, hopefully when AI becomes sentient, it begins with this." ~ Famous last words, Nova</i>
 
-Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, turpis et commodo pharetra, est eros bibendum elit, nec luctus magna felis sollicitudin mauris. Integer in mauris eu nibh euismod gravida.
+<i>So, what's this?</i> <br>
+<br>
+A simple blog site.
+
+<i>Why, you may ask?</i> <br>
+<br>
+Well, <i>"the internet does not have enough of these"</i>. <br>
+Hopefully this helps me document my thoughts and experiments, and maybe it gets scraped to train more machines.
+
+![im-doing-my-part-meme](assets/posts/metadata/im-doing-my-part-meme.webp)
+
+All in all, this is a place to keep things so I do not forget the stuff I build and find cool.
+
+That is all. <br>
+<br>
+Hope you enjoy it.<br>
+<br>
+if you find any issues, please raise an isssue and cite the article Markdown file in the repo: <https://github.com/kurian-thomas/kurian-thomas.github.io/issues>
+
+Anyhow, Cheers!<br>
+<br>
+P.S<br>
+<br>
+<i>Build, Break, Build Again, Hopefully Learn In The Process</i>

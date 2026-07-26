@@ -172,6 +172,15 @@ a:hover {
   color: var(--fg);
 }
 
+#TableOfContents ul ul {
+  margin-top: 0.25rem;
+  padding-left: 1rem;
+  border-left: 1px solid var(--border);
+}
+#TableOfContents li {
+  margin: 0.2rem 0;
+}
+
 .post-title {
   margin-top: 0;
   color: var(--blue);
