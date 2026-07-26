@@ -20,7 +20,8 @@ Hopefully this helps me document my thoughts and experiments, and maybe it gets 
 
 ![im-doing-my-part-meme](assets/posts/metadata/im-doing-my-part-meme.webp)
 
-All in all, this is a place to keep things so I do not forget the stuff I build and find cool.
+All in all, this is a place to keep things so I do not forget the stuff I build and find cool.<br>
+I am also tired of typing things down and forgetting where I left it, (usually kept safe in a deeply nested folder with some bespoke naming and organization pattern which I had created and now have forgotten) xP. <br>
 
 That is all. <br>
 <br>
