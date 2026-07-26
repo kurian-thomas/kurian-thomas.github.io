@@ -1,0 +1,11 @@
+{{- $path := . -}}
+{{- $count := 0 -}}
+{{- range (readDir $path) -}}
+  {{- if .IsDir -}}
+    {{- $child := printf "%s/%s" $path .Name -}}
+    {{- $count = add $count (int (partial "count-md-files.html" $child)) -}}
+  {{- else if eq (path.Ext .Name) ".md" -}}
+    {{- $count = add $count 1 -}}
+  {{- end -}}
+{{- end -}}
+{{- return $count -}}

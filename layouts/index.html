@@ -4,7 +4,7 @@
   {{ partial "artbox.html" . }}
 </header>
 
-{{ $posts := (where .Site.RegularPages "Section" "posts") }}
+{{ $posts := where (where .Site.RegularPages "Section" "posts") "Draft" false }}
 <p class="ls-total">total {{ len $posts }}</p>
 
 {{ $scratch := newScratch }}
@@ -24,83 +24,69 @@
   {{ end }}
 {{ end }}
 
-{{ $rootHasMarkdown := false }}
-{{ range (readDir "content/posts") }}
-  {{ if and (not .IsDir) (eq (path.Ext .Name) ".md") }}
-    {{ $rootHasMarkdown = true }}
-  {{ end }}
-{{ end }}
-
 <p><span class="prompt">nova-nvim-style-blog <span class="branch-name">master</span> ❯</span> tree ~/posts</p>
 <ul class="dir-tree">
   <li class="dir-tree-item">.</li>
   {{ range (readDir "content/posts") }}
     {{ if .IsDir }}
-    <li class="dir-tree-item">|-- {{ .Name }}/</li>
+      <li class="dir-tree-item">|-- {{ .Name }}/</li>
     {{ end }}
   {{ end }}
 </ul>
 
-{{ if $rootHasMarkdown }}
-  {{ $dir := "." }}
-  {{ $dirPosts := sort (($scratch.Get (printf "dir-%s" $dir)) | default (slice)) "Date" "desc" }}
-  <section class="dir-block">
-    <p class="dir-command"><span class="prompt">nova-nvim-style-blog <span class="branch-name">master</span> ❯</span> ls -al ~/posts</p>
-    <p class="ls-total">total {{ len $dirPosts }}</p>
-
-    <ul class="post-list">
-      {{ range $dirPosts }}
-      {{ $group := .Params.group | default "ungrouped" }}
-      {{ $fullPath := replaceRE "^posts/" "" .File.Path }}
-      {{ $displayName := $fullPath }}
-      {{ if eq $dir "." }}
-        {{ $displayName = path.Base $fullPath }}
-      {{ else }}
-        {{ $displayName = replaceRE (printf "^%s/" $dir) "" $fullPath }}
-      {{ end }}
-      <li class="ls-row">
-        <a class="post-row-link" href="{{ .RelPermalink }}">
-          <span class="col-perms">-r--r--r--</span>
-          <span class="col-links">1</span>
-          <span class="col-owner">nova</span>
-          <span class="col-group">{{ $group }}</span>
-          <span class="col-size">{{ len .Plain }}</span>
-          <span class="col-date">{{ .Date.Format "Jan 02 2006" }}</span>
-          <span class="col-name">{{ $displayName }}</span>
-        </a>
-      </li>
-      {{ end }}
-    </ul>
-  </section>
+{{ $rootDir := "." }}
+{{ $rootPosts := sort (($scratch.Get (printf "dir-%s" $rootDir)) | default (slice)) "Date" "desc" }}
+{{ if gt (len $rootPosts) 0 }}
+<section class="dir-block">
+  <p class="dir-command"><span class="prompt">nova-nvim-style-blog <span class="branch-name">master</span> ❯</span> ls -al ~/posts</p>
+  <p class="ls-total">total {{ len $rootPosts }}</p>
+  <ul class="post-list">
+    {{ range $rootPosts }}
+    {{ $group := .Params.group | default "ungrouped" }}
+    {{ $fullPath := replaceRE "^posts/" "" .File.Path }}
+    <li class="ls-row">
+      <a class="post-row-link" href="{{ .RelPermalink }}">
+        <span class="col-perms">-r--r--r--</span>
+        <span class="col-links">1</span>
+        <span class="col-owner">nova</span>
+        <span class="col-group">{{ $group }}</span>
+        <span class="col-size">{{ len .Plain }}</span>
+        <span class="col-date">{{ .Date.Format "Jan 02 2006" }}</span>
+        <span class="col-name">{{ path.Base $fullPath }}</span>
+      </a>
+    </li>
+    {{ end }}
+  </ul>
+</section>
 {{ end }}
 
 {{ range (readDir "content/posts") }}
   {{ if .IsDir }}
-  {{ $dir := .Name }}
-  {{ $dirPosts := sort (($scratch.Get (printf "dir-%s" $dir)) | default (slice)) "Date" "desc" }}
-  <section class="dir-block">
-    <p class="dir-command"><span class="prompt">nova-nvim-style-blog <span class="branch-name">master</span> ❯</span> ls -al ~/posts/{{ $dir }}</p>
-    <p class="ls-total">total {{ len $dirPosts }}</p>
-
-    <ul class="post-list">
-      {{ range $dirPosts }}
-      {{ $group := .Params.group | default "ungrouped" }}
-      {{ $fullPath := replaceRE "^posts/" "" .File.Path }}
-      {{ $displayName := replaceRE (printf "^%s/" $dir) "" $fullPath }}
-      <li class="ls-row">
-        <a class="post-row-link" href="{{ .RelPermalink }}">
-          <span class="col-perms">-r--r--r--</span>
-          <span class="col-links">1</span>
-          <span class="col-owner">nova</span>
-          <span class="col-group">{{ $group }}</span>
-          <span class="col-size">{{ len .Plain }}</span>
-          <span class="col-date">{{ .Date.Format "Jan 02 2006" }}</span>
-          <span class="col-name">{{ $displayName }}</span>
-        </a>
-      </li>
-      {{ end }}
-    </ul>
-  </section>
+    {{ $dir := .Name }}
+    {{ $dirPosts := sort (($scratch.Get (printf "dir-%s" $dir)) | default (slice)) "Date" "desc" }}
+    {{ $dirFileCount := int (partial "count-md-files.html" (printf "content/posts/%s" $dir)) }}
+    <section class="dir-block">
+      <p class="dir-command"><span class="prompt">nova-nvim-style-blog <span class="branch-name">master</span> ❯</span> ls -al ~/posts/{{ $dir }}</p>
+      <p class="ls-total">total {{ $dirFileCount }}</p>
+      <ul class="post-list">
+        {{ range $dirPosts }}
+        {{ $group := .Params.group | default "ungrouped" }}
+        {{ $fullPath := replaceRE "^posts/" "" .File.Path }}
+        {{ $displayName := replaceRE (printf "^%s/" $dir) "" $fullPath }}
+        <li class="ls-row">
+          <a class="post-row-link" href="{{ .RelPermalink }}">
+            <span class="col-perms">-r--r--r--</span>
+            <span class="col-links">1</span>
+            <span class="col-owner">nova</span>
+            <span class="col-group">{{ $group }}</span>
+            <span class="col-size">{{ len .Plain }}</span>
+            <span class="col-date">{{ .Date.Format "Jan 02 2006" }}</span>
+            <span class="col-name">{{ $displayName }}</span>
+          </a>
+        </li>
+        {{ end }}
+      </ul>
+    </section>
   {{ end }}
 {{ end }}
 {{ end }}

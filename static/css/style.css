@@ -43,26 +43,25 @@ a:hover {
   font-style: italic;
 }
 .container {
+  box-sizing: border-box;
   max-width: 1200px;
   margin: 0 auto;
   padding-top: 0;
-  padding-right: calc(var(--art-box-width) + var(--art-box-gap));
+  padding-right: 0;
 }
 
 .art-box {
-  position: fixed;
-  top: 1rem;
-  right: 1rem;
+  float: right;
   width: var(--art-box-width);
   max-width: calc(100vw - 2rem);
   max-height: 220px;
   overflow: hidden;
   padding: 0.75rem 0.05rem 0.75rem 0.75rem;
+  margin: 0 0 0.75rem 1rem;
   border: 1px solid var(--border);
   background: color-mix(in oklab, var(--bg-dim) 90%, black 10%);
   border-radius: 6px;
   opacity: 0.9;
-  z-index: 1;
 }
 
 .art-box pre {
@@ -115,11 +114,15 @@ a:hover {
 
 .post-row-link {
   display: grid;
-  grid-template-columns: 110px 20px 60px 80px 70px 110px minmax(160px, 1fr);
+  grid-template-columns: 110px 20px 60px minmax(130px, 220px) 70px 110px minmax(180px, 1fr);
   gap: 0.8rem;
   align-items: baseline;
   color: inherit;
   text-decoration: none;
+}
+
+.post-row-link > span {
+  min-width: 0;
 }
 
 .post-row-link:hover {
@@ -139,6 +142,13 @@ a:hover {
 .col-group,
 .col-size {
   color: var(--comment);
+  white-space: nowrap;
+}
+
+.col-group {
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .col-name {
@@ -164,7 +174,7 @@ a:hover {
 
 .post-layout {
   display: grid;
-  grid-template-columns: 250px 1fr;
+  grid-template-columns: fit-content(22rem) minmax(0, 1fr);
   gap: 3rem;
   align-items: start;
 }
@@ -173,8 +183,10 @@ a:hover {
   position: sticky;
   top: 2rem;
   border-right: 1px solid var(--border);
-  padding-right: 1rem;
+  padding-right: 1.25rem;
   height: max-content;
+  max-width: 22rem;
+  overflow-wrap: anywhere;
 }
 .back-link {
   display: inline-block;
@@ -209,6 +221,27 @@ a:hover {
   margin-top: 0;
   color: var(--blue);
 }
+
+.post-title-row {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.status-pill {
+  display: inline-block;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.1rem 0.55rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.02em;
+}
+
+.draft-pill {
+  color: var(--red);
+  background: color-mix(in oklab, var(--red) 12%, var(--bg) 88%);
+}
+
 .post-meta {
   color: var(--comment);
   font-size: 0.9rem;
@@ -258,13 +291,11 @@ a:hover {
   }
 
   .art-box {
-    position: static;
-    top: auto;
-    right: auto;
+    float: none;
     max-width: 100%;
     max-height: none;
     overflow: visible;
-    margin: 0.45rem 0 0.75rem;
+    margin: 0.45rem 0 0.75rem 0;
   }
 }
 

@@ -4,7 +4,7 @@
 <div class="post-layout">
   <aside class="left-nav">
     <div class="nav-sticky">
-      <a href="/" class="back-link">cd ..</a>
+      <a href="/" class="back-link">cd ~/nova-blog</a>
       {{ if $hasOutline }}
       {{ $toc }}
       {{ end }}
@@ -12,7 +12,12 @@
   </aside>
 
   <article class="post-content">
-    <h1 class="post-title">{{ .Title }}</h1>
+    <div class="post-title-row">
+      <h1 class="post-title">{{ .Title }}</h1>
+      {{ if .Draft }}
+      <span class="status-pill draft-pill">DRAFT</span>
+      {{ end }}
+    </div>
     <div class="post-meta">
       Date: {{ .Date.Format "2006-01-02" }} | Group: {{ .Params.group | default "ungrouped" }}
     </div>
