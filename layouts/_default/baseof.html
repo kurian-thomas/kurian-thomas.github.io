@@ -14,5 +14,39 @@
   </head>
   <body>
     <main class="container">{{ block "main" . }}{{ end }}</main>
+    <script>
+      (() => {
+        const promptHtml = 'nova-nvim-style-blog <span class="branch-name">master</span> ❯';
+        const delayMs = 1000;
+
+        const preview = document.getElementById("open-preview");
+        const postLinks = document.querySelectorAll(".post-link[data-post-path]");
+        for (const link of postLinks) {
+          link.addEventListener("click", (event) => {
+            if (event.defaultPrevented || event.button !== 0) return;
+            if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+
+            event.preventDefault();
+            const postPath = link.dataset.postPath || link.textContent || "";
+            if (preview) {
+              preview.innerHTML = `<span class="prompt">${promptHtml}</span> nvim ${postPath}`;
+              preview.hidden = false;
+            }
+            setTimeout(() => {
+              window.location.href = link.href;
+            }, delayMs);
+          });
+        }
+
+        const openCommand = document.querySelector("[data-open-command]");
+        const postBody = document.querySelector("[data-post-body]");
+        if (openCommand && postBody) {
+          postBody.hidden = true;
+          setTimeout(() => {
+            postBody.hidden = false;
+          }, delayMs);
+        }
+      })();
+    </script>
   </body>
 </html>
