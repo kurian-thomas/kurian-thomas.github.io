@@ -4,6 +4,16 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{{ .Title }} | {{ .Site.Title }}</title>
+    <script>
+      (() => {
+        try {
+          const savedTheme = sessionStorage.getItem("nova-blog-theme");
+          if (savedTheme) {
+            document.documentElement.setAttribute("data-theme", savedTheme);
+          }
+        } catch (_) {}
+      })();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -13,6 +23,90 @@
     <link rel="stylesheet" href="/css/style.css" />
   </head>
   <body>
+    <div class="theme-picker" data-theme-picker>
+      <button class="theme-toggle-btn" type="button" aria-label="Open theme picker" data-theme-toggle>
+        <svg
+          aria-hidden="true"
+          class="theme-icon"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M12 3C7.03 3 3 6.58 3 11c0 2.04.94 3.9 2.5 5.31.56.5.89 1.22.89 1.97V20a1 1 0 0 0 1 1h1.41a2 2 0 0 0 1.41-.59l.34-.34a2 2 0 0 1 1.41-.59H13a8 8 0 1 0-1-16Z"
+            stroke="currentColor"
+            stroke-width="1.7"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <circle cx="7.5" cy="11.5" r="1.1" fill="currentColor" />
+          <circle cx="10.5" cy="8.5" r="1.1" fill="currentColor" />
+          <circle cx="14.2" cy="8.4" r="1.1" fill="currentColor" />
+          <circle cx="16.8" cy="11.4" r="1.1" fill="currentColor" />
+        </svg>
+      </button>
+      <div class="theme-dropdown" hidden data-theme-dropdown>
+        <label class="theme-label" for="theme-select">Theme</label>
+        <select id="theme-select" data-theme-select>
+          <option value="everforest">Everforest</option>
+          <option value="gruvbox">Gruvbox</option>
+          <option value="tokyonight">Tokyonight</option>
+          <option value="catppuccin-mocha">Catppuccin Mocha</option>
+          <option value="nord">Nord</option>
+          <option value="onedark">One Dark</option>
+          <option value="dracula">Dracula</option>
+          <option value="kanagawa">Kanagawa</option>
+          <option value="rose-pine">Rose Pine</option>
+        </select>
+      </div>
+    </div>
     <main class="container">{{ block "main" . }}{{ end }}</main>
+    <script>
+      (() => {
+        const root = document.documentElement;
+        const picker = document.querySelector("[data-theme-picker]");
+        const toggle = document.querySelector("[data-theme-toggle]");
+        const dropdown = document.querySelector("[data-theme-dropdown]");
+        const select = document.querySelector("[data-theme-select]");
+        if (!picker || !toggle || !dropdown || !select) return;
+
+        const storageKey = "nova-blog-theme";
+        const activeTheme = root.getAttribute("data-theme") || "everforest";
+        select.value = activeTheme;
+
+        const closeDropdown = () => {
+          dropdown.hidden = true;
+          toggle.setAttribute("aria-expanded", "false");
+        };
+
+        const openDropdown = () => {
+          dropdown.hidden = false;
+          toggle.setAttribute("aria-expanded", "true");
+        };
+
+        toggle.setAttribute("aria-expanded", "false");
+        toggle.addEventListener("click", () => {
+          if (dropdown.hidden) openDropdown();
+          else closeDropdown();
+        });
+
+        select.addEventListener("change", () => {
+          const nextTheme = select.value;
+          root.setAttribute("data-theme", nextTheme);
+          try {
+            sessionStorage.setItem(storageKey, nextTheme);
+          } catch (_) {}
+          closeDropdown();
+        });
+
+        document.addEventListener("click", (event) => {
+          if (!picker.contains(event.target)) closeDropdown();
+        });
+
+        document.addEventListener("keydown", (event) => {
+          if (event.key === "Escape") closeDropdown();
+        });
+      })();
+    </script>
   </body>
 </html>
