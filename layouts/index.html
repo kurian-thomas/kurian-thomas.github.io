@@ -11,7 +11,7 @@
   {{ $group := .Params.group | default "ungrouped" }}
   {{ $name := replaceRE "^posts/" "" .File.Path }}
   <li class="ls-row">
-    <span class="col-perms">-rw-r--r--</span>
+    <span class="col-perms">-r--r--r--</span>
     <span class="col-links">1</span>
     <span class="col-owner">nova</span>
     <span class="col-group">{{ $group }}</span>
