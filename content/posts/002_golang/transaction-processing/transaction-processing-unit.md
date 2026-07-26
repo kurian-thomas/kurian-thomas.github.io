@@ -137,3 +137,24 @@ The Http server has 2 routes<br>
 1. The InitDb route -> Inserts all the keys possible keys , _Hack_ so that we don't have to handle a missing key problem<br>
 2. The execute workload route -> The request tells the server, "Hey, execute this query in a 2PL or OCC (Snapshot Isolation)"
    </i>
+
+### Lets Break Down What 2PL & Snapshot Isolation Is Here
+
+#### 2 Phase Locking
+
+<i>
+We are using strict 2PL, which means we know the keys before hand and accure all the locks before doing anything.<br>
+2PL or 2 phase locking as the name suggest has 2 phases.<br>
+1. The growth phase -> Accuriing all the locks<br>
+2. The shrink phase -> releasing all the locks<br>
+<br>
+There is no in-between, if it gets all the locks then success!! it can do all the logic on the values and change it then release it all. Whats great about this is that its guarentees protection, ie. while this transaction is changing the keys no other transaction will change it until this is done (because they cannot accquire the keys to do it)
+</i>
+
+#### Snapshot Isolation (OCC)
+
+<i>
+I dont think this is exactly Snapshot Isolation, but its close.<br>
+<br>
+The idea is simple: we don't need the strict locking, We use Glorious Versioning !!!!!, That means, if transaction T1 reads a key with version V0, does its logic changes, then before writing it fetches a latch (lock that key for a small time period) check if its still V0 we can proceed to write. It asks the question did any other transaction change this while I was doing my logic with it. Its more complicated than that, we have mathamatical set based guraenties like write set, read set etc which I wont be diving into.
+</i>

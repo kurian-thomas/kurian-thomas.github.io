@@ -10,7 +10,9 @@
     <div class="nav-sticky">
       <a href="/" class="back-link">cd ~</a>
       {{ if $hasOutline }}
-      {{ $toc }}
+      <div class="nav-scroll">
+        {{ $toc }}
+      </div>
       {{ end }}
     </div>
   </aside>
