@@ -1,0 +1,14 @@
+{{ define "main" }}
+<header class="home-header">
+  <h1><span class="prompt">$</span> ls -la ~/posts</h1>
+</header>
+
+<ul class="post-list">
+  {{ range where .Site.RegularPages "Type" "posts" }}
+  <li>
+    <span class="date">{{ .Date.Format "2006-01-02" }}</span>
+    <a class="post-link" href="{{ .Permalink }}">{{ .Title }}</a>
+  </li>
+  {{ end }}
+</ul>
+{{ end }}

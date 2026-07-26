@@ -1,0 +1,13 @@
+baseURL = 'https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO_NAME/'
+languageCode = 'en-us'
+title = '~/'
+
+[markup]
+  [markup.highlight]
+    lineNos = true
+    style = "dracula" 
+  [markup.goldmark.renderer]
+    unsafe = true
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 4
