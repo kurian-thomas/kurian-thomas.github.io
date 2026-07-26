@@ -10,4 +10,4 @@ title = "Nova's Blog"
     unsafe = true
   [markup.tableOfContents]
     startLevel = 2
-    endLevel = 4
+    endLevel = 6

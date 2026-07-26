@@ -112,14 +112,15 @@ body {
   font-family: "JetBrains Mono", monospace;
   line-height: 1.6;
   margin: 0;
-  padding: 0 2rem 2rem;
+  padding: 0 1.25rem 2rem;
   overflow-x: hidden;
 }
 
 /* Subtle, theme-aware scrollbars */
 * {
   scrollbar-width: thin;
-  scrollbar-color: color-mix(in oklab, var(--comment) 55%, var(--bg) 45%) var(--bg-dim);
+  scrollbar-color: color-mix(in oklab, var(--comment) 55%, var(--bg) 45%)
+    var(--bg-dim);
 }
 
 *::-webkit-scrollbar {
@@ -229,7 +230,10 @@ a:hover {
 
 .post-row-link {
   display: grid;
-  grid-template-columns: 110px 20px 60px minmax(130px, 220px) 70px 110px minmax(180px, 1fr);
+  grid-template-columns: 110px 20px 60px minmax(130px, 220px) 70px 110px minmax(
+      180px,
+      1fr
+    );
   gap: 0.8rem;
   align-items: baseline;
   color: inherit;
@@ -287,10 +291,9 @@ a:hover {
   margin-top: 0;
 }
 
-
 @media (max-width: 1000px) {
   body {
-    padding: 0 1rem 1.25rem;
+    padding: 0 0.625rem 1.25rem;
   }
 
   .container {

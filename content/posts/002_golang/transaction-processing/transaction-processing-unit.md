@@ -1,5 +1,5 @@
 +++
-title = "A Brief Outline of a Mini Transaction Processing Unit Backed By Rocks DB In Go"
+title = "A Brief Outline Of A Mini Transaction Processing Unit Backed By Rocks DB In Go"
 date = 2026-07-25T21:03:00-07:00
 draft = true
 group = "golang/transaction-processing-unit"
@@ -86,3 +86,54 @@ Intermediate parsed template (human readable):
 Intermediate hydrated request to server (human readable):
 
 ![intermediate-parsed-hydrated-template](assets/posts/golang/transaction-processing/transaction_processing_unit_client_parsed_hydrated_template.webp)
+
+<div class="callout-note">
+<i>
+What does the intermediate form mean ?<br>
+1. Get -> Get from the database<br>
+2. Code -> Golang code that can be partially compiled, why ? To do athletic<br>
+3. Set -> Set a value to a key in the database<br>
+</i>
+</div>
+
+<i>
+This is then packaged into a format the server understands and sent via REST, in hindsight I should have used something like RPC protocol it would have been faster and more compact but I was hacking through and kept it simple.
+</i>
+
+#### The Server
+
+![intermediate-parsed-hydrated-template](assets/posts/golang/transaction-processing/transaction_processing_unit_server_multi_threaded.webp)
+
+<i>
+Aint she beautiful ?<br>
+<br>
+I designed it based on 2 core concepts, the actor queuing strategy and the channel based fan out strategy.<br>
+why ? <br>
+1. I needed each query to `wait` for the TPU to translate and execute the query or retry and die (we will talk about this later)<br>
+2. I needed to control the number of goroutines (Go runtime managed light weight green threads, multi plexed over OS threads), because each connection to RocksDB would lock that OS thread. controlling the threads was needed for metrics and also see how the system improved as I increased the thread count. Also considering the server to have similed thread resoruces.
+</i>
+
+##### Go Multithreading Model Brief
+
+<i>
+Go uses an M:N model where M goroutines are mapped to N OS threads. One of the greatest things in Goroutines is the use of channels, as they provide an OOTB experience of wait when full, or empty which suspends the thread.This way we can make sure the the server does not run out of CPU resoruces. Now thats very cool, Prodictivity and conceptual understanding at its peak.
+</i>
+
+<i>
+So what does it do ?<br>
+In a nutshell: <br>
+1. Takes the request and scans it, to identify the keys before hand.<br>
+2. It generates a common context data struct that is used to pass information around.<br>
+3. Tries to acquire a lock before doing anything (strict) for TPL, if failed, retry with timeout.<br>
+4. Translate the query and execute it.<br>
+</i>
+
+### The Cool Parts (Server Internals)
+
+![intermediate-parsed-hydrated-template](assets/posts/golang/transaction-processing/transaction_processing_unit_processing_unit_server_internal.webp)
+<i>
+The Http server has 2 routes<br>
+
+1. The InitDb route -> Inserts all the keys possible keys , _Hack_ so that we don't have to handle a missing key problem<br>
+2. The execute workload route -> The request tells the server, "Hey, execute this query in a 2PL or OCC (Snapshot Isolation)"
+   </i>
