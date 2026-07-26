@@ -47,16 +47,60 @@
       </button>
       <div class="theme-dropdown" hidden data-theme-dropdown>
         <label class="theme-label" for="theme-select">Theme</label>
-        <select id="theme-select" data-theme-select>
+        <input
+          id="theme-search"
+          class="theme-search"
+          type="search"
+          placeholder="Search theme..."
+          autocomplete="off"
+          data-theme-search
+        />
+        <select id="theme-select" size="10" data-theme-select>
           <option value="everforest">Everforest</option>
+          <option value="everforest-soft">Everforest Soft</option>
+          <option value="everforest-hard">Everforest Hard</option>
           <option value="gruvbox">Gruvbox</option>
+          <option value="gruvbox-material">Gruvbox Material</option>
           <option value="tokyonight">Tokyonight</option>
+          <option value="tokyonight-storm">Tokyonight Storm</option>
+          <option value="tokyonight-moon">Tokyonight Moon</option>
           <option value="catppuccin-mocha">Catppuccin Mocha</option>
+          <option value="catppuccin-macchiato">Catppuccin Macchiato</option>
+          <option value="catppuccin-frappe">Catppuccin Frappe</option>
+          <option value="catppuccin-latte">Catppuccin Latte</option>
           <option value="nord">Nord</option>
+          <option value="nordic">Nordic</option>
           <option value="onedark">One Dark</option>
           <option value="dracula">Dracula</option>
           <option value="kanagawa">Kanagawa</option>
+          <option value="kanagawa-wave">Kanagawa Wave</option>
+          <option value="kanagawa-dragon">Kanagawa Dragon</option>
+          <option value="kanagawa-lotus">Kanagawa Lotus</option>
           <option value="rose-pine">Rose Pine</option>
+          <option value="rose-pine-moon">Rose Pine Moon</option>
+          <option value="rose-pine-dawn">Rose Pine Dawn</option>
+          <option value="nightfox">Nightfox</option>
+          <option value="duskfox">Duskfox</option>
+          <option value="nordfox">Nordfox</option>
+          <option value="terafox">Terafox</option>
+          <option value="carbonfox">Carbonfox</option>
+          <option value="github-dark">Github Dark</option>
+          <option value="github-light">Github Light</option>
+          <option value="material">Material</option>
+          <option value="papercolor">PaperColor</option>
+          <option value="ayu-dark">Ayu Dark</option>
+          <option value="ayu-light">Ayu Light</option>
+          <option value="solarized-dark">Solarized Dark</option>
+          <option value="solarized-light">Solarized Light</option>
+          <option value="habamax">Habamax</option>
+          <option value="elflord">Elflord</option>
+          <option value="industry">Industry</option>
+          <option value="murphy">Murphy</option>
+          <option value="pablo">Pablo</option>
+          <option value="ron">Ron</option>
+          <option value="slate">Slate</option>
+          <option value="torte">Torte</option>
+          <option value="vim">Vim</option>
         </select>
       </div>
     </div>
@@ -67,12 +111,22 @@
         const picker = document.querySelector("[data-theme-picker]");
         const toggle = document.querySelector("[data-theme-toggle]");
         const dropdown = document.querySelector("[data-theme-dropdown]");
+        const search = document.querySelector("[data-theme-search]");
         const select = document.querySelector("[data-theme-select]");
-        if (!picker || !toggle || !dropdown || !select) return;
+        if (!picker || !toggle || !dropdown || !select || !search) return;
 
         const storageKey = "nova-blog-theme";
         const activeTheme = root.getAttribute("data-theme") || "everforest";
         select.value = activeTheme;
+
+        const filterThemes = () => {
+          const query = search.value.trim().toLowerCase();
+          for (const option of select.options) {
+            const label = option.text.toLowerCase();
+            const match = !query || label.includes(query);
+            option.hidden = !match;
+          }
+        };
 
         const closeDropdown = () => {
           dropdown.hidden = true;
@@ -82,6 +136,9 @@
         const openDropdown = () => {
           dropdown.hidden = false;
           toggle.setAttribute("aria-expanded", "true");
+          filterThemes();
+          search.focus();
+          search.select();
         };
 
         toggle.setAttribute("aria-expanded", "false");
@@ -96,8 +153,9 @@
           try {
             sessionStorage.setItem(storageKey, nextTheme);
           } catch (_) {}
-          closeDropdown();
         });
+
+        search.addEventListener("input", filterThemes);
 
         document.addEventListener("click", (event) => {
           if (!picker.contains(event.target)) closeDropdown();
