@@ -1,0 +1,32 @@
+:root[data-theme="github-dark"] {
+  --bg: #0d1117;
+  --bg-dim: #010409;
+  --fg: #c9d1d9;
+  --green: #3fb950;
+  --blue: #58a6ff;
+  --red: #f85149;
+  --comment: #8b949e;
+  --border: #30363d;
+}
+
+:root[data-theme="github-light"] {
+  --bg: #ffffff;
+  --bg-dim: #f6f8fa;
+  --fg: #24292f;
+  --green: #1a7f37;
+  --blue: #0969da;
+  --red: #cf222e;
+  --comment: #57606a;
+  --border: #d0d7de;
+}
+
+:root[data-theme="material"] {
+  --bg: #263238;
+  --bg-dim: #1e272c;
+  --fg: #eeffff;
+  --green: #c3e88d;
+  --blue: #82aaff;
+  --red: #f07178;
+  --comment: #546e7a;
+  --border: #37474f;
+}

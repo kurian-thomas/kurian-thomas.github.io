@@ -23,6 +23,8 @@ Hopefully this helps me document my thoughts and experiments, and maybe it gets 
 All in all, this is a place to keep things so I do not forget the stuff I build and find cool.<br>
 I am also tired of typing things down and forgetting where I left it, (usually kept safe in a deeply nested folder with some bespoke naming and organization pattern which I had created and now have forgotten) xP. <br>
 
+Credit where credit is due: The frontend and the Hugo wiring up was done mostly using cursor and gpt 5.6 medium. Super cool and lovely for frontend work and stuff I am not particularly interested in doing. Up until my trial runs out!
+
 That is all. <br>
 <br>
 Hope you enjoy it.<br>

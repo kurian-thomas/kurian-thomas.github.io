@@ -1,0 +1,33 @@
+:root[data-theme="kanagawa"],
+:root[data-theme="kanagawa-wave"] {
+  --bg: #1f1f28;
+  --bg-dim: #16161d;
+  --fg: #dcd7ba;
+  --green: #98bb6c;
+  --blue: #7e9cd8;
+  --red: #e46876;
+  --comment: #727169;
+  --border: #54546d;
+}
+
+:root[data-theme="kanagawa-dragon"] {
+  --bg: #181616;
+  --bg-dim: #12120f;
+  --fg: #c5c9c5;
+  --green: #87a987;
+  --blue: #8ba4b0;
+  --red: #c4746e;
+  --comment: #7a8382;
+  --border: #625e5a;
+}
+
+:root[data-theme="kanagawa-lotus"] {
+  --bg: #f2ecbc;
+  --bg-dim: #e5ddb0;
+  --fg: #545464;
+  --green: #6f894e;
+  --blue: #4d699b;
+  --red: #c84053;
+  --comment: #8a8980;
+  --border: #c9cbd1;
+}

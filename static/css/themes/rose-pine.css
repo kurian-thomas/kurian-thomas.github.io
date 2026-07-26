@@ -1,0 +1,32 @@
+:root[data-theme="rose-pine"] {
+  --bg: #191724;
+  --bg-dim: #16141f;
+  --fg: #e0def4;
+  --green: #9ccfd8;
+  --blue: #c4a7e7;
+  --red: #eb6f92;
+  --comment: #6e6a86;
+  --border: #524f67;
+}
+
+:root[data-theme="rose-pine-moon"] {
+  --bg: #232136;
+  --bg-dim: #2a273f;
+  --fg: #e0def4;
+  --green: #9ccfd8;
+  --blue: #c4a7e7;
+  --red: #eb6f92;
+  --comment: #908caa;
+  --border: #56526e;
+}
+
+:root[data-theme="rose-pine-dawn"] {
+  --bg: #faf4ed;
+  --bg-dim: #fffaf3;
+  --fg: #575279;
+  --green: #56949f;
+  --blue: #907aa9;
+  --red: #b4637a;
+  --comment: #9893a5;
+  --border: #cecacd;
+}

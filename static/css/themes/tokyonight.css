@@ -1,0 +1,32 @@
+:root[data-theme="tokyonight"] {
+  --bg: #1a1b26;
+  --bg-dim: #16161e;
+  --fg: #c0caf5;
+  --green: #9ece6a;
+  --blue: #7aa2f7;
+  --red: #f7768e;
+  --comment: #565f89;
+  --border: #3b4261;
+}
+
+:root[data-theme="tokyonight-storm"] {
+  --bg: #24283b;
+  --bg-dim: #1f2335;
+  --fg: #c0caf5;
+  --green: #9ece6a;
+  --blue: #7aa2f7;
+  --red: #f7768e;
+  --comment: #565f89;
+  --border: #414868;
+}
+
+:root[data-theme="tokyonight-moon"] {
+  --bg: #222436;
+  --bg-dim: #1e2030;
+  --fg: #c8d3f5;
+  --green: #c3e88d;
+  --blue: #82aaff;
+  --red: #ff757f;
+  --comment: #636da6;
+  --border: #3b4261;
+}

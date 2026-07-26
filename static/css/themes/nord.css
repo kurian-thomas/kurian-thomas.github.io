@@ -1,0 +1,21 @@
+:root[data-theme="nord"] {
+  --bg: #2e3440;
+  --bg-dim: #242933;
+  --fg: #d8dee9;
+  --green: #a3be8c;
+  --blue: #81a1c1;
+  --red: #bf616a;
+  --comment: #616e88;
+  --border: #4c566a;
+}
+
+:root[data-theme="nordic"] {
+  --bg: #242933;
+  --bg-dim: #1f232c;
+  --fg: #bbc3d4;
+  --green: #a3be8c;
+  --blue: #88c0d0;
+  --red: #d06f79;
+  --comment: #7b88a1;
+  --border: #4c566a;
+}

@@ -1,0 +1,32 @@
+:root[data-theme="everforest"] {
+  --bg: #2d353b;
+  --bg-dim: #232a2e;
+  --fg: #d3c6aa;
+  --green: #a7c080;
+  --blue: #7fbbb3;
+  --red: #e67e80;
+  --comment: #859289;
+  --border: #475258;
+}
+
+:root[data-theme="everforest-soft"] {
+  --bg: #333c43;
+  --bg-dim: #293136;
+  --fg: #d3c6aa;
+  --green: #a7c080;
+  --blue: #7fbbb3;
+  --red: #e67e80;
+  --comment: #859289;
+  --border: #4d5960;
+}
+
+:root[data-theme="everforest-hard"] {
+  --bg: #272e33;
+  --bg-dim: #1e2326;
+  --fg: #d3c6aa;
+  --green: #a7c080;
+  --blue: #7fbbb3;
+  --red: #e67e80;
+  --comment: #859289;
+  --border: #414b50;
+}

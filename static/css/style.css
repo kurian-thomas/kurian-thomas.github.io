@@ -1,7 +1,17 @@
-/* 
- * Everforest theme css
- * 
- * */
+/* Core layout/styles. Theme palettes are split in /themes */
+
+@import url("./themes/everforest.css");
+@import url("./themes/gruvbox.css");
+@import url("./themes/tokyonight.css");
+@import url("./themes/catppuccin.css");
+@import url("./themes/nord.css");
+@import url("./themes/core-dark.css");
+@import url("./themes/kanagawa.css");
+@import url("./themes/rose-pine.css");
+@import url("./themes/nightfox.css");
+@import url("./themes/github-material.css");
+@import url("./themes/ayu-solarized-papercolor.css");
+@import url("./themes/builtin-vim.css");
 
 :root {
   --bg: #272e33;
@@ -14,180 +24,6 @@
   --border: #475258;
   --art-box-width: 340px;
   --art-box-gap: 0.05rem;
-}
-
-:root[data-theme="everforest-soft"],
-:root[data-theme="everforest-hard"] {
-  --bg: #272e33;
-  --bg-dim: #1e2326;
-  --fg: #d3c6aa;
-  --green: #a6b46c;
-  --blue: #7fbbb3;
-  --red: #e67e80;
-  --comment: #859289;
-  --border: #475258;
-}
-
-:root[data-theme="gruvbox"],
-:root[data-theme="gruvbox-material"] {
-  --bg: #282828;
-  --bg-dim: #1d2021;
-  --fg: #ebdbb2;
-  --green: #b8bb26;
-  --blue: #83a598;
-  --red: #fb4934;
-  --comment: #928374;
-  --border: #504945;
-}
-
-:root[data-theme="tokyonight"],
-:root[data-theme="tokyonight-storm"],
-:root[data-theme="tokyonight-moon"] {
-  --bg: #1a1b26;
-  --bg-dim: #16161e;
-  --fg: #c0caf5;
-  --green: #9ece6a;
-  --blue: #7aa2f7;
-  --red: #f7768e;
-  --comment: #565f89;
-  --border: #414868;
-}
-
-:root[data-theme="catppuccin-mocha"],
-:root[data-theme="catppuccin-macchiato"],
-:root[data-theme="catppuccin-frappe"] {
-  --bg: #1e1e2e;
-  --bg-dim: #181825;
-  --fg: #cdd6f4;
-  --green: #a6e3a1;
-  --blue: #89b4fa;
-  --red: #f38ba8;
-  --comment: #7f849c;
-  --border: #585b70;
-}
-
-:root[data-theme="catppuccin-latte"],
-:root[data-theme="kanagawa-lotus"],
-:root[data-theme="rose-pine-dawn"],
-:root[data-theme="github-light"],
-:root[data-theme="ayu-light"],
-:root[data-theme="solarized-light"],
-:root[data-theme="papercolor"] {
-  --bg: #f4f4f4;
-  --bg-dim: #e9e9e9;
-  --fg: #2a2a2a;
-  --green: #2f855a;
-  --blue: #2b6cb0;
-  --red: #c53030;
-  --comment: #667085;
-  --border: #c7ccd1;
-}
-
-:root[data-theme="nord"],
-:root[data-theme="nordic"],
-:root[data-theme="nordfox"] {
-  --bg: #2e3440;
-  --bg-dim: #242933;
-  --fg: #d8dee9;
-  --green: #a3be8c;
-  --blue: #81a1c1;
-  --red: #bf616a;
-  --comment: #7b88a1;
-  --border: #4c566a;
-}
-
-:root[data-theme="onedark"],
-:root[data-theme="material"],
-:root[data-theme="github-dark"],
-:root[data-theme="nightfox"],
-:root[data-theme="duskfox"],
-:root[data-theme="terafox"],
-:root[data-theme="carbonfox"] {
-  --bg: #282c34;
-  --bg-dim: #21252b;
-  --fg: #abb2bf;
-  --green: #98c379;
-  --blue: #61afef;
-  --red: #e06c75;
-  --comment: #5c6370;
-  --border: #3e4451;
-}
-
-:root[data-theme="dracula"] {
-  --bg: #282a36;
-  --bg-dim: #21222c;
-  --fg: #f8f8f2;
-  --green: #50fa7b;
-  --blue: #8be9fd;
-  --red: #ff5555;
-  --comment: #6272a4;
-  --border: #44475a;
-}
-
-:root[data-theme="kanagawa"],
-:root[data-theme="kanagawa-wave"],
-:root[data-theme="kanagawa-dragon"] {
-  --bg: #1f1f28;
-  --bg-dim: #16161d;
-  --fg: #dcd7ba;
-  --green: #98bb6c;
-  --blue: #7e9cd8;
-  --red: #e46876;
-  --comment: #727169;
-  --border: #54546d;
-}
-
-:root[data-theme="rose-pine"],
-:root[data-theme="rose-pine-moon"] {
-  --bg: #191724;
-  --bg-dim: #16141f;
-  --fg: #e0def4;
-  --green: #9ccfd8;
-  --blue: #c4a7e7;
-  --red: #eb6f92;
-  --comment: #6e6a86;
-  --border: #524f67;
-}
-
-:root[data-theme="ayu-dark"] {
-  --bg: #0f1419;
-  --bg-dim: #111b25;
-  --fg: #b3b1ad;
-  --green: #7fd962;
-  --blue: #59c2ff;
-  --red: #f07178;
-  --comment: #5c6773;
-  --border: #314457;
-}
-
-:root[data-theme="solarized-dark"] {
-  --bg: #002b36;
-  --bg-dim: #073642;
-  --fg: #93a1a1;
-  --green: #859900;
-  --blue: #268bd2;
-  --red: #dc322f;
-  --comment: #586e75;
-  --border: #3e5761;
-}
-
-:root[data-theme="habamax"],
-:root[data-theme="elflord"],
-:root[data-theme="industry"],
-:root[data-theme="murphy"],
-:root[data-theme="pablo"],
-:root[data-theme="ron"],
-:root[data-theme="slate"],
-:root[data-theme="torte"],
-:root[data-theme="vim"] {
-  --bg: #1c1c1c;
-  --bg-dim: #121212;
-  --fg: #d0d0d0;
-  --green: #87af5f;
-  --blue: #5f87af;
-  --red: #d75f5f;
-  --comment: #808080;
-  --border: #444444;
 }
 
 .theme-picker {

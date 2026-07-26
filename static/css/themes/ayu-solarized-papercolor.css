@@ -1,0 +1,54 @@
+:root[data-theme="papercolor"] {
+  --bg: #1c1c1c;
+  --bg-dim: #151515;
+  --fg: #d0d0d0;
+  --green: #87af00;
+  --blue: #5fafd7;
+  --red: #d70000;
+  --comment: #808080;
+  --border: #585858;
+}
+
+:root[data-theme="ayu-dark"] {
+  --bg: #0a0e14;
+  --bg-dim: #0f131a;
+  --fg: #b3b1ad;
+  --green: #7fd962;
+  --blue: #59c2ff;
+  --red: #f07178;
+  --comment: #5c6773;
+  --border: #314457;
+}
+
+:root[data-theme="ayu-light"] {
+  --bg: #fafafa;
+  --bg-dim: #f0f0f0;
+  --fg: #5c6166;
+  --green: #86b300;
+  --blue: #399ee6;
+  --red: #f07171;
+  --comment: #787b80;
+  --border: #dfe0e1;
+}
+
+:root[data-theme="solarized-dark"] {
+  --bg: #002b36;
+  --bg-dim: #073642;
+  --fg: #839496;
+  --green: #859900;
+  --blue: #268bd2;
+  --red: #dc322f;
+  --comment: #586e75;
+  --border: #657b83;
+}
+
+:root[data-theme="solarized-light"] {
+  --bg: #fdf6e3;
+  --bg-dim: #eee8d5;
+  --fg: #657b83;
+  --green: #859900;
+  --blue: #268bd2;
+  --red: #dc322f;
+  --comment: #93a1a1;
+  --border: #d4cdb8;
+}

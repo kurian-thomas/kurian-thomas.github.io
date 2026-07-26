@@ -1,0 +1,21 @@
+:root[data-theme="onedark"] {
+  --bg: #282c34;
+  --bg-dim: #21252b;
+  --fg: #abb2bf;
+  --green: #98c379;
+  --blue: #61afef;
+  --red: #e06c75;
+  --comment: #5c6370;
+  --border: #3e4451;
+}
+
+:root[data-theme="dracula"] {
+  --bg: #282a36;
+  --bg-dim: #21222c;
+  --fg: #f8f8f2;
+  --green: #50fa7b;
+  --blue: #8be9fd;
+  --red: #ff5555;
+  --comment: #6272a4;
+  --border: #44475a;
+}
