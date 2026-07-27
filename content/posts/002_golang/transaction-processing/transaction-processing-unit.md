@@ -189,6 +189,18 @@ Illustration from the lecture:
 
 ![wait-die-illustration](assets/posts/golang/transaction-processing/wait-die.png)
 
+### How Did The Server Execute The Intermediate Code
+
+<i>
+This was also a pretty hacky way of implementing this.<br><br>
+Every GET and SET is a DBTask.<br>
+So, the server iterated through parsed GET operations and used the operation key to fetch from RocksDB. The fetched result was stored in an in-memory cache (a simple
+map per translation, no complicated eviction policy included).<br>
+Every CODE block was split into LHS and RHS, where the RHS was compiled and evaluated against the variable values in the cache and then stored back. (The rule here is that every variable should be fetched via GET before doing anything with it.)<br>
+Finally, every SET fetches the final value from the cache and updates the RocksDB entry.<br><br>
+We also built a wrapper around RocksDB to make it versioned, so every entry gets a version assigned to it.
+</i>
+
 ### Interesting Optimization
 
 <i>
