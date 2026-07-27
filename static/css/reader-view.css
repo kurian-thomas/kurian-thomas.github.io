@@ -1,19 +1,29 @@
 .post-layout {
+  --reader-nav-collapsed-width: 5ch;
+  --reader-nav-open-width: 24ch;
   display: grid;
-  grid-template-columns: 15ch minmax(0, 1fr);
+  grid-template-columns: var(--reader-nav-collapsed-width) minmax(0, 1fr);
   gap: 2rem;
   align-items: stretch;
 }
 
+.post-layout.nav-open {
+  grid-template-columns: var(--reader-nav-open-width) minmax(0, 1fr);
+}
+
 .left-nav {
-  width: 15ch;
+  width: var(--reader-nav-collapsed-width);
+}
+
+.left-nav.is-open {
+  width: var(--reader-nav-open-width);
 }
 
 .nav-sticky {
   position: fixed;
   top: 0;
   left: calc(1.25rem + max((100vw - 2.5rem - 1200px) / 2, 0px));
-  width: 15ch;
+  width: var(--reader-nav-collapsed-width);
   height: 100vh;
   border-right: 1px solid var(--border);
   padding-top: 0.8rem;
@@ -21,6 +31,11 @@
   box-sizing: border-box;
   overflow-wrap: anywhere;
   text-align: left;
+  transition: width 140ms ease;
+}
+
+.left-nav.is-open .nav-sticky {
+  width: var(--reader-nav-open-width);
 }
 
 .nav-scroll {
@@ -30,6 +45,10 @@
   direction: rtl;
   scrollbar-width: none;
   -ms-overflow-style: none;
+}
+
+.nav-scroll[hidden] {
+  display: none;
 }
 
 .nav-scroll::-webkit-scrollbar {
@@ -48,6 +67,41 @@
   margin-right: auto;
   margin-bottom: 1rem;
   color: var(--red);
+  white-space: nowrap;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+.contents-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0;
+  white-space: nowrap;
+  border: 0;
+  background: transparent;
+  color: var(--fg);
+  font: inherit;
+  font-size: 1rem;
+  line-height: 1;
+  min-width: 3ch;
+  padding: 0;
+  margin-bottom: 0.7rem;
+  cursor: pointer;
+}
+
+.burger-icon {
+  width: 1.05rem;
+  height: 0.72rem;
+  display: inline-block;
+  background:
+    linear-gradient(currentColor, currentColor) 0 0 / 100% 2px no-repeat,
+    linear-gradient(currentColor, currentColor) 0 50% / 100% 2px no-repeat,
+    linear-gradient(currentColor, currentColor) 0 100% / 100% 2px no-repeat;
+}
+
+.contents-toggle:hover {
+  color: var(--blue);
 }
 
 #TableOfContents ul {
@@ -171,7 +225,15 @@
     gap: 1.25rem;
   }
 
+  .post-layout.nav-open {
+    grid-template-columns: 1fr;
+  }
+
   .left-nav {
+    width: auto;
+  }
+
+  .left-nav.is-open {
     width: auto;
   }
 
@@ -190,6 +252,10 @@
     max-height: none;
     overflow: visible;
     direction: ltr;
+  }
+
+  .nav-scroll[hidden] {
+    display: none;
   }
 
   .post-meta {

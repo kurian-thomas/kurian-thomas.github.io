@@ -5,12 +5,15 @@
 {{ define "main" }}
 {{ $toc := .TableOfContents }}
 {{ $hasOutline := gt (len (findRE "<li>" $toc)) 0 }}
-<div class="post-layout">
-  <aside class="left-nav">
+<div class="post-layout" data-reader-layout>
+  <aside class="left-nav" data-left-nav>
     <div class="nav-sticky">
       <a href="/" class="back-link">cd ~</a>
       {{ if $hasOutline }}
-      <div class="nav-scroll">
+      <button class="contents-toggle" type="button" aria-expanded="false" data-contents-toggle>
+        <span class="burger-icon" aria-hidden="true"></span>
+      </button>
+      <div class="nav-scroll" data-nav-scroll>
         {{ $toc }}
       </div>
       {{ end }}
@@ -31,4 +34,28 @@
     <div class="markdown-body">{{ .Content }}</div>
   </article>
 </div>
+{{ if $hasOutline }}
+<script>
+  (() => {
+    const layout = document.querySelector("[data-reader-layout]");
+    const leftNav = document.querySelector("[data-left-nav]");
+    const toggle = document.querySelector("[data-contents-toggle]");
+    const navScroll = document.querySelector("[data-nav-scroll]");
+    if (!layout || !leftNav || !toggle || !navScroll) return;
+
+    const setOpen = (open) => {
+      layout.classList.toggle("nav-open", open);
+      leftNav.classList.toggle("is-open", open);
+      toggle.setAttribute("aria-expanded", open ? "true" : "false");
+      navScroll.hidden = !open;
+    };
+
+    setOpen(false);
+    toggle.addEventListener("click", () => {
+      const open = !leftNav.classList.contains("is-open");
+      setOpen(open);
+    });
+  })();
+</script>
+{{ end }}
 {{ end }}

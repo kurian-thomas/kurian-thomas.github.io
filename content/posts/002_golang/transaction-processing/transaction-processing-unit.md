@@ -1,7 +1,7 @@
 +++
 title = "A Brief Outline Of A Mini Transaction Processing Unit Backed By RocksDB In Go"
 date = 2026-07-25T21:03:00-07:00
-draft = true
+draft = false
 group = "golang/transaction-processing-unit"
 +++
 
@@ -40,6 +40,8 @@ The system had 2 major pieces:<br>
 #### The Client
 
 ![client-arch](assets/posts/golang/transaction-processing/transaction_processing_unit_client_arch.webp)
+
+![skeletor-laugh](assets/posts/memes/skeletor-laugh.gif)
 
 <i>
 What is this monster? Well, this is how we decided to parse the workload DSL. Built a tiny compiler!! with context-free grammar!! and then used that template to hydrate it with a key set so that the client could generate multiple requests with different random keys from a set and an overlapping hot set. i.e., if the client selects a key from the hotset (high contention) with probability p, then it selects a key from the normal set with probability 1-p. This is particularly interesting as contention is a huge factor in deciding which CC we need to pick.<br>
@@ -103,6 +105,7 @@ This is then packaged into a format the server understands and sent via REST. In
 #### The Server
 
 ![intermediate-parsed-hydrated-template](assets/posts/golang/transaction-processing/transaction_processing_unit_server_multi_threaded.webp)
+![ron-beautiful](assets/posts/memes/ron-its-beautiful.gif)
 
 <i>
 Ain't she beautiful?<br>
@@ -110,7 +113,7 @@ Ain't she beautiful?<br>
 I designed it based on 2 core concepts: the actor queuing strategy and the channel-based fan-out strategy.<br>
 <br>
 Why?<br>
-1. I needed each query to `wait` for the TPU to translate and execute the query or dir(abort) and retry (we will talk about this later)<br>
+1. I needed each query to `wait` for the TPU to translate and execute the query or die (abort) and retry (we will talk about this later)<br>
 2. I needed to control the number of goroutines (Go runtime-managed lightweight threads multiplexed over OS threads), because cgo calls into RocksDB can pin/work with OS threads. Controlling concurrency was needed for metrics, and also to see how the system improved as I increased thread count, while assuming limited server resources.
 </i>
 
@@ -134,8 +137,10 @@ In a nutshell: <br>
 ### The Cool Parts (Server Internals)
 
 ![intermediate-parsed-hydrated-template](assets/posts/golang/transaction-processing/transaction_processing_unit_processing_unit_server_internal.webp)
+![nerd-excited](assets/posts/memes/nerd-excited.gif)
+
 <i>
-The HTTP server has 2 main routes (initDb, and Run schedule):<br>
+The HTTP server has 2 main workload routes (InitDb, and Runschedule):<br>
 
 1. The InitDb route -> Inserts all the possible keys. _Hack_ so that we don't have to handle missing-key errors everywhere.<br>
 2. The execute workload route -> The request tells the server, "Hey, execute this query in 2PL or OCC (SI-style validation)."
@@ -210,7 +215,9 @@ Since we could compile the client and server as individual binaries, we could al
 ![occsi_commit_retry_count_v_reponse_time](assets/posts/golang/transaction-processing/occsi_log_distribution.png)
 
 <i>
-Multiple other tests were conducted in comparing these mechanisms. Seeing how each workload varied, and how architecture and system resources affected outcomes with trade-offs, was wonderful to observe. I do acknowledge this might not be the most exact or ideal setup to measure and compare. All in all, it was such a great experience building this and learning a lot in the process.
+Multiple other tests were conducted in comparing these mechanisms. Seeing how each workload varied, and how architecture and system resources affected outcomes with trade-offs, was wonderful to observe. I do acknowledge this might not be the most exact or ideal setup to measure and compare. All in all, it was such a great experience building this and learning a lot in the process. Truly appreciate it.
+
+![cloudy-cry](assets/posts/memes/cloudy-cry.gif)
 </i>
 
 ### Remarks
@@ -221,4 +228,4 @@ As I am typing this up, I am realizing how awesome and hard this project was. Le
 
 ### Acknowledgments (The MVPs)
 
-[Professor Faisal S. Nawab](https://www.linkedin.com/in/faisal-nawab-38597333/), and TAs [Farzad Habibi](https://www.linkedin.com/in/habibif/) and [Yinan Zhou](https://www.linkedin.com/in/yinandanielzhou/), for instruction and guidance at the University of California, Irvine and my teammate [Henry Keane](https://www.linkedin.com/in/hkeane/) for his support in making this project a success.
+[Professor Faisal S. Nawab](https://www.linkedin.com/in/faisal-nawab-38597333/), and TAs [Farzad Habibi](https://www.linkedin.com/in/habibif/) and [Yinan Zhou](https://www.linkedin.com/in/yinandanielzhou/), for instruction and guidance at the University of California, Irvine, and my teammate [Henry Keane](https://www.linkedin.com/in/hkeane/) for his support in making this project a success.
